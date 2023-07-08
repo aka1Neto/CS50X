@@ -2,4 +2,5 @@ cs50
 datetime
 Flask
 Flask-Session
+gunicorn
 requests
