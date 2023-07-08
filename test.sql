@@ -1,0 +1,13 @@
+DROP TABLE users;
+DROP TABLE history;
+DROP TABLE income;
+DROP TABLE expense;
+
+
+CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT NOT NULL, hash TEXT NOT NULL, cash NUMERIC NOT NULL DEFAULT 0.00);
+CREATE UNIQUE INDEX username ON users (username);
+CREATE TABLE history(user_id INTEGER NOT NULL, name TEXT NOT NULL, value NOT NULL,
+                    method TEXT NOT NULL, date_time TEXT NOT NULL);
+
+CREATE TABLE income(user_id INTEGER NOT NULL, name TEXT NOT NULL, value NUMERIC NOT NULL);
+CREATE TABLE expense(user_id INTEGER NOT NULL, name TEXT NOT NULL, value NUMERIC NOT NULL);

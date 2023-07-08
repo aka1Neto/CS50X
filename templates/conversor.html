@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Currency Converter
+{% endblock %}
+
+{% block main %}
+  <form action="/conversor" method="post">
+    <div class="space">
+      <select name="base_currency" type="text">
+          {% if base == None %}
+              <option disabled selected hidden>Base Currency</option>
+          {% else %}
+              <option disabled hidden>Base Currency</option>
+          {% endif %}
+          {% for key, value in symbols.items() %}
+              {% if base == key %}
+                  <option selected value='{{ key }}'>{{ value }}</option>
+              {% else %}
+                  <option value='{{ key }}'>{{ value }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+      <select name="target_currency" type="text">
+          {% if base == None %}
+              <option disabled selected hidden>Target Currency</option>
+          {% else %}
+              <option disabled hidden>Target Currency</option>
+          {% endif %}
+          {% for key, value in symbols.items() %}
+              {% if target == key %}
+                  <option selected value='{{ key }}'>{{ value }}</option>
+              {% else %}
+                  <option value='{{ key }}'>{{ value }}</option>
+              {% endif %}
+          {% endfor %}
+    </select>
+    </div>
+
+    <div class="space">
+      <input value="{{ value }}" id="base_value" name="base_value" placeholder="Base Value" type="number" step="0.01">
+      <input readonly value="{{ converted }}" id="converted_value" name="converted_value" placeholder="Coverted Value" type="number" step="0.01">
+    </div>
+
+    <br>
+
+    <button class="btn btn-primary" type="submit">Convert</button>
+
+  </form>
+{% endblock %}

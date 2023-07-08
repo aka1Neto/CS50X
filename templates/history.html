@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table id="color" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Value</th>
+                <th scope="col">Method</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{  item['name']  }}</td>
+                    {% if item['method'] == 'Income' %}
+                        <td id="green"><b>{{  item['value'] | usd  }}</b></td>
+                    {% else %}
+                        <td id="red"><b>-{{  item['value'] | usd  }}</b></td>
+                    {% endif %}
+                    <td>{{  item['method']  }}</td>
+                    <td>{{  item['date_time']  }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

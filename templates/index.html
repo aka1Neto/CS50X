@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <table id="color" class="table">
+        <thead>
+            <tr>
+                <th></th><th></th><th></th>
+                <th>Type</th>
+                <th><b>This Month Balance</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td><td></td><td></td>
+                <td id="green"><b>INCOME</b></td>
+                <td id="green"><b>{{  income | usd }}</b></td>
+            </tr>
+            <tr>
+                <td></td><td></td><td></td>
+                <td id="red"><b>EXPENSE</b></td>
+                <td id="red"><b>-{{  expense | usd }}</b></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td></td><td></td><td></td>
+                <td><b>BALANCE</b></td>
+                <td><b>{{  balance | usd }}</b></td>
+            </tr>
+    </table>
+
+    <div class="graph space">
+        {% if history %}
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <script>
+                Chart.defaults.color = '#FFF';
+                const ctx = document.getElementById('myChart');
+
+                const chart_labels = {{ labels | tojson }};
+                const chart_data = {{ data | tojson }};
+                const chart_colors = {{ colors | tojson }};
+
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data : {
+                        labels: chart_labels,
+                        datasets: [{
+                            label: "Overview",
+                            data: chart_data,
+                            backgroundColor: chart_colors,
+                            hoverOffset: 4
+                        }],
+                    }
+                });
+
+                ctx.style.height = "20rem";
+            </script>
+        {% endif %}
+    </div>
+{% endblock %}
