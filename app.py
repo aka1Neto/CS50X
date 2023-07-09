@@ -8,6 +8,7 @@ from helpers import apology, login_required, rates, usd, generate_color, check_p
 
 # Configure application
 app = Flask(__name__)
+app.debug = False
 
 app.jinja_env.filters["usd"] = usd
 
