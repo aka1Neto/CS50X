@@ -100,9 +100,9 @@ def expense():
             labels=[]
             data=[]
             colors=[]
-            for expense in expenses:
-                labels.append(expense['name'])
-                data.append(expense['value'])
+            for item in expenses:
+                labels.append(item['name'])
+                data.append(item['value'])
                 colors.append(generate_color())
 
             return render_template("expense.html", expense=expenses, labels=labels, data=data, colors=colors)
@@ -210,9 +210,9 @@ def income():
             labels=[]
             data=[]
             colors=[]
-            for income in incomes:
-                labels.append(income['name'])
-                data.append(income['value'])
+            for item in incomes:
+                labels.append(item['name'])
+                data.append(item['value'])
                 colors.append(generate_color())
 
             return render_template("income.html", income=incomes, labels=labels, data=data, colors=colors)
