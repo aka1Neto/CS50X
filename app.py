@@ -36,26 +36,26 @@ def after_request(response):
 def index():
     """Show overview of incomes and expenses"""
     user = session['user_id']
-    history = db.execute("SELECT * FROM history WHERE user_id=? AND strftime('%m', date_time)=?",
+    log = db.execute("SELECT * FROM history WHERE user_id=? AND strftime('%m', date_time)=?",
                        user, date.today().strftime('%m'))
-    income = 0
-    expense = 0
+    incomes = 0
+    expenses = 0
     labels = []
     data = []
     colors = []
-    for item in history:
+    for item in log:
         labels.append(item['name'])
         data.append(item['value'])
         if item['method'] == "Income":
             colors.append("#00FF00")
-            income += item["value"]
+            incomes += item["value"]
         else:
             colors.append("#FF0000")
-            expense += item["value"]
+            expenses += item["value"]
     balance = db.execute("SELECT cash FROM users WHERE id=?", user)
     balance = balance[0]["cash"]
 
-    return render_template("index.html", income=income, expense=expense, balance=balance, history=history, labels=labels, data=data, colors=colors)
+    return render_template("index.html", income=incomes, expense=expenses, balance=balance, history=log, labels=labels, data=data, colors=colors)
 
 
 @app.route("/expense", methods=["GET", "POST"])
@@ -105,7 +105,7 @@ def expense():
                 data.append(expense['value'])
                 colors.append(generate_color())
 
-            return render_template("expense.html", expense=expense, labels=labels, data=data, colors=colors)
+            return render_template("expense.html", expense=expenses, labels=labels, data=data, colors=colors)
 
         else:
             return render_template("expense.html")
