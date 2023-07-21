@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import redirect, render_template, request, session
+from flask import redirect, render_template, session
 import random
 import requests
 
@@ -66,6 +66,7 @@ def rates(symbol=None):
 
         except (KeyError, TypeError, ValueError):
             return None
+
 
 
 def generate_color():
