@@ -1,5 +1,5 @@
 # WALL-ET
-## Video Demo:  <URL HERE>
+## Video Demo:  <URL https://youtu.be/ikdAOyf02xc>
 ## Description:
 Wallet is a web app that helps you to manage your monthly bugdet.
 
